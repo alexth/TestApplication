@@ -12,6 +12,9 @@ import android.os.Parcelable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -212,8 +215,8 @@ public class RangeSeekBar extends View {
     }
 
     private void initSeekBar(AttributeSet attrs) {
-        leftSB = new SeekBar(this, attrs, true);
-        rightSB = new SeekBar(this, attrs, false);
+        leftSB = new SeekBar(getContext(), attrs, this, true);
+        rightSB = new SeekBar(getContext(), attrs, this, false);
         rightSB.setVisible(seekBarMode != SEEKBAR_MODE_SINGLE);
     }
 

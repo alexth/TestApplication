@@ -3,6 +3,7 @@ package com.example.widget;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -19,6 +20,9 @@ import android.os.Build;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -37,7 +41,7 @@ import java.text.DecimalFormat;
  * ================================================
  */
 
-public class SeekBar {
+public class SeekBar extends ConstraintLayout {
     //the indicator show mode
     public static final int INDICATOR_SHOW_WHEN_TOUCH = 0;
     public static final int INDICATOR_ALWAYS_HIDE = 1;
@@ -99,7 +103,37 @@ public class SeekBar {
     int scaleThumbWidth;
     int scaleThumbHeight;
 
-    public SeekBar(RangeSeekBar rangeSeekBar, AttributeSet attrs, boolean isLeft) {
+    // TODO: WIP
+//    public SeekBar(RangeSeekBar rangeSeekBar, AttributeSet attrs, boolean isLeft) {
+//        this.rangeSeekBar = rangeSeekBar;
+//        this.isLeft = isLeft;
+//        initAttrs(attrs);
+//        initBitmap();
+//        initVariables();
+//    }
+
+    public SeekBar(@NonNull Context context, RangeSeekBar rangeSeekBar, boolean isLeft) {
+        super(context);
+        init(rangeSeekBar, null, isLeft);
+    }
+
+    public SeekBar(@NonNull Context context, @Nullable AttributeSet attrs, RangeSeekBar rangeSeekBar, boolean isLeft) {
+        super(context, attrs);
+        init(rangeSeekBar, attrs, isLeft);
+    }
+
+    public SeekBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, RangeSeekBar rangeSeekBar, boolean isLeft) {
+        super(context, attrs, defStyleAttr);
+        init(rangeSeekBar, attrs, isLeft);
+    }
+
+    @TargetApi(21)
+    public SeekBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes, RangeSeekBar rangeSeekBar, boolean isLeft) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(rangeSeekBar, attrs, isLeft);
+    }
+
+    private void init(RangeSeekBar rangeSeekBar, @Nullable AttributeSet attrs, boolean isLeft) {
         this.rangeSeekBar = rangeSeekBar;
         this.isLeft = isLeft;
         initAttrs(attrs);
@@ -143,9 +177,10 @@ public class SeekBar {
         }
     }
 
-    public Context getContext() {
-        return rangeSeekBar.getContext();
-    }
+    // TODO: WIP
+//    public Context getContext() {
+//        return rangeSeekBar.getContext();
+//    }
 
     public Resources getResources() {
         if (getContext() != null) return getContext().getResources();
@@ -206,7 +241,8 @@ public class SeekBar {
      *
      * @param canvas Canvas
      */
-    protected void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
         if (!isVisible) {
             return;
         }
@@ -221,6 +257,22 @@ public class SeekBar {
         onDrawThumb(canvas);
         canvas.restore();
     }
+    // TODO: WIP
+//    protected void draw(Canvas canvas) {
+//        if (!isVisible) {
+//            return;
+//        }
+//        int offset = (int) (rangeSeekBar.getProgressWidth() * currPercent);
+//        canvas.save();
+//        canvas.translate(offset, 0);
+//        // translate canvas, then don't care left
+//        canvas.translate(left, 0);
+//        if (isShowIndicator) {
+//            onDrawIndicator(canvas, paint, formatCurrentIndicatorText(userText2Draw));
+//        }
+//        onDrawThumb(canvas);
+//        canvas.restore();
+//    }
 
 
     /**
