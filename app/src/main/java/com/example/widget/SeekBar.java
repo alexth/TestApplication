@@ -26,7 +26,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
+import com.example.testapplication.AgeThumb;
 import com.example.testapplication.R;
 
 import java.text.DecimalFormat;
@@ -41,7 +44,7 @@ import java.text.DecimalFormat;
  * ================================================
  */
 
-public class SeekBar extends ConstraintLayout {
+public class SeekBar extends FrameLayout {
     //the indicator show mode
     public static final int INDICATOR_SHOW_WHEN_TOUCH = 0;
     public static final int INDICATOR_ALWAYS_HIDE = 1;
@@ -137,8 +140,9 @@ public class SeekBar extends ConstraintLayout {
         this.rangeSeekBar = rangeSeekBar;
         this.isLeft = isLeft;
         initAttrs(attrs);
-        initBitmap();
+//        initBitmap();
         initVariables();
+        initAgeThumb();
     }
 
     private void initAttrs(AttributeSet attrs) {
@@ -177,10 +181,11 @@ public class SeekBar extends ConstraintLayout {
         }
     }
 
-    // TODO: WIP
-//    public Context getContext() {
-//        return rangeSeekBar.getContext();
-//    }
+    protected void initAgeThumb() {
+        AgeThumb ageThumb = new AgeThumb(getContext());
+        this.addView(ageThumb, new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setBackgroundColor(Color.GREEN);
+    }
 
     public Resources getResources() {
         if (getContext() != null) return getContext().getResources();
@@ -211,7 +216,6 @@ public class SeekBar extends ConstraintLayout {
         top = y - getThumbHeight() / 2;
         bottom = y + getThumbHeight() / 2;
     }
-
 
     public void scaleThumb() {
         scaleThumbWidth = (int) getThumbScaleWidth();

@@ -7,4 +7,5 @@
     <color name="rsbColorThumbPressed">#FFE7E7E7</color>
     <color name="rsbColorThumbDefault">#FFFFFF</color>
     <color name="rsbColorThumbBorder">#FFD7D7D7</color>
+    <color name="userAgreementTextColor">#afafaf</color>
 </resources>
